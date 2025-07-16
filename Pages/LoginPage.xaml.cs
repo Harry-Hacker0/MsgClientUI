@@ -16,21 +16,16 @@ using System.Windows.Shapes;
 namespace MsgClientUI.Pages
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class LoginPage : Page
     {
-        public HomePage()
+        public LoginPage()
         {
             InitializeComponent();
         }
 
-        private void Create_Channel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Reconnect_Click(object sender, RoutedEventArgs e)
+        private void Connect_Click(object sender, RoutedEventArgs e)
         {
 
         }

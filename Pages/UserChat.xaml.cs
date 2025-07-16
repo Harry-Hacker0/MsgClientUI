@@ -12,25 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MsgClientUI.Messages;
+using MsgClientUI.Interface;
+using MsgClientUI.Infrastructure;
 
 namespace MsgClientUI.Pages
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// Interaction logic for Homepage.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class UserChat : Page
     {
-        public HomePage()
+        public UserChat()
         {
             InitializeComponent();
         }
 
-        private void Create_Channel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Reconnect_Click(object sender, RoutedEventArgs e)
+        private void Message_Enter_KeyDown(object sender, KeyEventArgs e)
         {
 
         }

@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using MsgClientUI.Messages;
 using MsgClientUI.Interface;
 using MsgClientUI.Infrastructure;
+using MsgClientUI.Pages;
 
 namespace MsgClientUI
 {
@@ -31,11 +32,15 @@ namespace MsgClientUI
         public MainWindow()
         {
             InitializeComponent();
+
+            
+
             newList = new();
-            messageList.ItemsSource = newList;
+
+            //messageList.ItemsSource = newList;
             Connect();
 
-            if (messageList.Items.Count > 0) messageList.ScrollIntoView(messageList.Items[messageList.Items.Count - 1]);
+            //if (messageList.Items.Count > 0) messageList.ScrollIntoView(messageList.Items[messageList.Items.Count - 1]);
             
         }
 
@@ -52,7 +57,7 @@ namespace MsgClientUI
             Debug.WriteLine($"To Be Added: {IsSuccessful.Content}");
 
             newList.Add(IsSuccessful);
-            if (messageList.Items.Count > 0) messageList.ScrollIntoView(messageList.Items[messageList.Items.Count - 1]);
+            //if (messageList.Items.Count > 0) messageList.ScrollIntoView(messageList.Items[messageList.Items.Count - 1]);
         }
 
         public void OnSelect(int chatValue)
@@ -75,7 +80,7 @@ namespace MsgClientUI
 
         private void Create_Channel_Click(object sender, RoutedEventArgs e)
         {
-            messageList.Visibility = Visibility.Collapsed;
+            //messageList.Visibility = Visibility.Collapsed;
 
             ActionMessage actionMessage = new ActionMessage();
 
@@ -89,11 +94,11 @@ namespace MsgClientUI
                 ChatMessage chatMessage = new ChatMessage();
                 chatMessage.author = user.GetCode();
                 chatMessage.timestamp = DateTime.Now;
-                chatMessage.content = messageTextbox.Text;
+                //chatMessage.content = messageTextbox.Text;
                 chatMessage.channel = "Channel 4";
 
                 user.SendMessage("CHT", chatMessage);
-                messageTextbox.Text = "";
+                //messageTextbox.Text = "";
             }
         }
     }
