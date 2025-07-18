@@ -14,8 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MsgClientUI.Messages;
-using MsgClientUI.Interface;
 using MsgClientUI.Infrastructure;
+using MsgClientUI.Pages;
+using MsgClientUI.Bindings;
 
 namespace MsgClientUI
 {
@@ -24,77 +25,67 @@ namespace MsgClientUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        User user;
-        MessageList newList;
-        Dictionary <int,Page> pages = new Dictionary <int,Page> ();
+        public ConnectionHandler user;
+        Dictionary <string, UserChat> pages = new Dictionary <string, UserChat> ();
+        HomePage homepage;
 
         public MainWindow()
         {
             InitializeComponent();
-            newList = new();
-            messageList.ItemsSource = newList;
-            Connect();
+        }
 
-            if (messageList.Items.Count > 0) messageList.ScrollIntoView(messageList.Items[messageList.Items.Count - 1]);
-            
+        public ConnectionHandler Connection
+        {
+            get { return user; }
+            set { user = value; }
+        }
+
+        public Dictionary<string, UserChat> Pages
+        {
+            get { return pages; }
+            set { pages = value; }
         }
 
         public void Connect()
         {
 
-            user = new User();
+            user = new ConnectionHandler();
             user.UpdateMessages += AddMessage;
+            user.UpdateUsers += AddUser;
+            if (user.IsConnected)
+            {
+                homepage = new HomePage();
+                mainApplicationFrame.Content = homepage;
+            }
         }
 
-        // event handler
+        // Add Message Event Handler
         public void AddMessage(object sender, MessageItem IsSuccessful)
         {
             Debug.WriteLine($"To Be Added: {IsSuccessful.Content}");
 
-            newList.Add(IsSuccessful);
-            if (messageList.Items.Count > 0) messageList.ScrollIntoView(messageList.Items[messageList.Items.Count - 1]);
-        }
-
-        public void OnSelect(int chatValue)
-        {
-            if (pages.TryGetValue(chatValue, out Page chat))
+            if (pages.TryGetValue(IsSuccessful.Channel, out UserChat value)) 
             {
-
+                Debug.WriteLine($"MainWindow UserChat: {IsSuccessful.Channel}");
+                value.AddChatMessage(IsSuccessful);
             }
             else
             {
-
+                Debug.WriteLine($"MainWindow New UserChat: {IsSuccessful.Channel}");
+                UserChat newChat = new UserChat();
+                newChat.SetPageID(IsSuccessful.Channel);
+                pages.Add(IsSuccessful.Channel, newChat);
+                newChat.AddChatMessage(IsSuccessful);
             }
         }
 
-
-        private void Reconnect_Click(object sender, RoutedEventArgs e)
+        // Add User Event Handler
+        public void AddUser(object sender, UserItem IsSuccessful)
         {
-            user.Connect();
-        }
+            Debug.WriteLine($"To Be Added: {IsSuccessful.AuthorID}");
 
-        private void Create_Channel_Click(object sender, RoutedEventArgs e)
-        {
-            messageList.Visibility = Visibility.Collapsed;
-
-            ActionMessage actionMessage = new ActionMessage();
-
-            //user.SendMessage("ACT", actionMessage);
-        }
-
-        private void Message_Enter_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                ChatMessage chatMessage = new ChatMessage();
-                chatMessage.author = user.GetCode();
-                chatMessage.timestamp = DateTime.Now;
-                chatMessage.content = messageTextbox.Text;
-                chatMessage.channel = "Channel 4";
-
-                user.SendMessage("CHT", chatMessage);
-                messageTextbox.Text = "";
-            }
+            homepage.AddUser(IsSuccessful);
+            Debug.WriteLine($"Added: {IsSuccessful.AuthorID}");
         }
     }
 }

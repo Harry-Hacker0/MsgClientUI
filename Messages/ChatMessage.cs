@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MsgClientUI.Messages
 {
-    internal class ChatMessage
+    public class ChatMessage
     {
         public DateTime timestamp { get; set; }
         public int author { get; set; }

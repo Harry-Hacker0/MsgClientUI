@@ -1,0 +1,82 @@
+﻿<Page x:Class="MsgClientUI.Pages.UserChat"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MsgClientUI.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserChat">
+    
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/Dictionary1.xaml"/>
+    </Page.Resources>
+
+    <Grid Background="#1B1B1E">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Channel -->
+        <Grid x:Name="channelGrid"
+            Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            
+            <!-- chatName -->
+            <Label x:Name="chatName"
+                Grid.Row="1"
+                Background="#373F51"
+                Foreground="#D8DBE2" 
+            />
+
+            <!-- messageList -->
+            <ListBox x:Name="messageList"
+                Grid.Row="3"
+                Background="#373F51"
+                ItemTemplate="{StaticResource MessageTemplate}"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                IsSynchronizedWithCurrentItem="True"
+                BorderThickness="0"
+            />
+
+            <!-- messageTextbox -->
+            <TextBox x:Name="messageTextbox"
+                Grid.Row="5" 
+                Background="#373F51" 
+                Foreground="#D8DBE2" 
+                KeyDown="Message_Enter_KeyDown" 
+                TextWrapping="Wrap" 
+                BorderThickness="0"
+            />
+            
+        </Grid>
+
+
+        <!-- Widgets -->
+        <Grid x:Name="widgetsGrid"
+            Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            
+            
+        </Grid>
+
+        
+    </Grid>
+</Page>

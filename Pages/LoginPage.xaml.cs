@@ -18,11 +18,19 @@ namespace MsgClientUI.Pages
     /// <summary>
     /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class Login : Page
+    public partial class LoginPage : Page
     {
-        public Login()
+        MainWindow window;
+
+        public LoginPage()
         {
             InitializeComponent();
+            window = (MainWindow)Application.Current.MainWindow;
+        }
+
+        private void Connect_Click(object sender, RoutedEventArgs e)
+        {
+            window.Connect();
         }
     }
 }
