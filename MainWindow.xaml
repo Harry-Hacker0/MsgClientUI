@@ -46,10 +46,7 @@
         <Frame x:Name="mainApplicationFrame"
             Grid.Column="1" 
             Grid.Row="1"
-            NavigationUIVisibility="Visible"
+            NavigationUIVisibility="Hidden"
             Source="/Pages/LoginPage.xaml"/>
-
-        
-        
     </Grid>
 </Window>

@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    
+    <DataTemplate x:Key="MessageTemplate">
+        <StackPanel>
+            <TextBlock Text="{Binding Path=AuthorID}" Foreground="#A9BCD0"  TextAlignment="Justify" TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding Path=Content}" Foreground="#D8DBE2"  TextAlignment="Justify" TextWrapping="Wrap"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="UsersTemplate">
+        <StackPanel >
+            <TextBlock x:Name="AuthorID" Text="{Binding Path=AuthorID}" Foreground="#A9BCD0"  TextAlignment="Justify" TextWrapping="Wrap"/>
+        </StackPanel>
+    </DataTemplate>
+
+</ResourceDictionary>

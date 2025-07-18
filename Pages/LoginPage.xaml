@@ -83,7 +83,8 @@
                 VerticalContentAlignment="Center"
                 Click="Connect_Click"
                 />
-
+            
+            
         </Grid>
         
     </Grid>

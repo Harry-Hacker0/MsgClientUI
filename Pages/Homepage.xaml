@@ -8,55 +8,76 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HomePage">
 
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/Dictionary1.xaml"/>
+    </Page.Resources>
+    
+    
     <Grid>
 
-        <Grid Grid.Column="3" Grid.Row="1" Background="#373F51" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
 
-        </Grid>
-
-        <Grid Grid.Column="0" Grid.Row="3">
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+            
             <ListBox 
                 x:Name="userList"
+                ItemTemplate="{StaticResource UsersTemplate}"
+                Grid.Row="0"
                 Background="#373F51"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
                 IsSynchronizedWithCurrentItem="True"
                 BorderThickness="0"
+                SelectionChanged="User_Selection_Changed"
                />
+            <Grid
+                Grid.Row="1"
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="usernameLabel"
+                    Grid.Column="0"
+                    />
+
+                <Button 
+                    Grid.Column="1"
+                    Content="C"
+                    FontSize="11" 
+                    FontFamily="Gadugi" 
+                    FontWeight="Heavy" 
+                    Background="#3C3751" 
+                    Click="Create_Channel_Click"
+                />
+                <Button 
+                    Grid.Column="2"
+                    Content="R" 
+                    FontSize="11" 
+                    FontFamily="Gadugi" 
+                    FontWeight="Heavy" 
+                    Background="#3C3751"
+                    Click="Reconnect_Click" 
+                    />
+            </Grid>
         </Grid>
 
-        <Grid Grid.Column="0" Grid.Row="5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Content="C" FontSize="11" FontFamily="Gadugi" FontWeight="Heavy" Background="#3C3751" Click="Create_Channel_Click" Grid.Column="0"/>
-            <Button Content="R" FontSize="11" FontFamily="Gadugi" FontWeight="Heavy" Background="#3C3751" Click="Reconnect_Click" Grid.Column="2"/>
-        </Grid>
 
 
-        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="5" Background="#373F51">
-            <Frame x:Name="MainFrame">
-
-            </Frame>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <Grid x:Name="homepageFrameGrid"
+            Grid.Column="2"
+        >
+            <Frame x:Name="homepageFrame"/>
         </Grid>
     </Grid>
 </Page>

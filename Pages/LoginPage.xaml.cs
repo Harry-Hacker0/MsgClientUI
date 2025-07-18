@@ -20,14 +20,17 @@ namespace MsgClientUI.Pages
     /// </summary>
     public partial class LoginPage : Page
     {
+        MainWindow window;
+
         public LoginPage()
         {
             InitializeComponent();
+            window = (MainWindow)Application.Current.MainWindow;
         }
 
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
-
+            window.Connect();
         }
     }
 }

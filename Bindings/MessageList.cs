@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using MsgClientUI.Messages;
 
-namespace MsgClientUI.Interface
+namespace MsgClientUI.Bindings
 {
     public class MessageList : ObservableCollection<MessageItem>
     {
@@ -19,7 +20,7 @@ namespace MsgClientUI.Interface
     public class MessageItem
     {
         private DateTime timestamp;
-        private int author;
+        private int authorID;
         private string channel;
         private string content;
 
@@ -27,11 +28,17 @@ namespace MsgClientUI.Interface
         public MessageItem(DateTime created, int author, string channel, string messageContent )
         {
             this.timestamp = created;
-            this.author = author;
+            this.authorID = author;
             this.channel = channel;
             this.content = messageContent;
+        }
 
-            //MessageList.AddNewMessage( iD,  messageAuthor,  messageContent,  createdTime);
+        public MessageItem(ChatMessage chatMessage)
+        {
+            this.timestamp = chatMessage.timestamp;
+            this.authorID = chatMessage.author;
+            this.channel = chatMessage.channel;
+            this.content = chatMessage.content;
         }
 
 
@@ -41,10 +48,10 @@ namespace MsgClientUI.Interface
             set { timestamp = value; }
         }
 
-        public int Author
+        public int AuthorID
         {
-            get { return author; }
-            set { author = value; }
+            get { return authorID; }
+            set { authorID = value; }
         }
 
         public string Channel
